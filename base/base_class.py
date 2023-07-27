@@ -15,6 +15,7 @@ class Base():
 
     def assert_word(self, word, result):
         value_word = word.text
+        # print(f"Проверка пройдена на слово: {value_word} and {result}")
         assert value_word == result
         print(f"Проверка пройдена на слово: {value_word}")
 

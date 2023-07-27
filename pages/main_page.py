@@ -6,29 +6,30 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Main_page(Base):
 
-    url = 'https://www.eldorado.ru/'
+    url = 'https://famshop.ru/'
 
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
 
     # Locators
-    catalog = '//*[@id="__next"]/div[1]/div[1]/nav/ul/li[1]/a'
-    word_login_and_registration = '//*[@id="__next"]/div[1]/header/div[2]/div/div[2]/button'
-    word_catalog = '//*[@id="__next"]/div[1]/main/div/div/h1'
+    word_contact = '//*[@id="menu-item-447"]/a'
+    category_men = '//*[@id="menu-item-124"]/a'
+    word_men = '//*[@id="main"]/header/h1'
 
 
 
     #Getters
 
-    def get_catalog(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.catalog)))
+    def get_word_contact(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.word_contact)))
 
-    def get_word_login_and_registration(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.word_login_and_registration)))
+    def get_category_men(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.category_men)))
 
-    def get_word_catalog(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.word_catalog)))
+
+    def get_word_men(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.word_men)))
 
 
 
@@ -36,9 +37,9 @@ class Main_page(Base):
     #Actions
 
 
-    def click_catalog(self):
-        self.get_catalog().click()
-        print("Перешли в каталог")
+    def click_category_men(self):
+        self.get_category_men().click()
+        print("Перешли в категорию товаров 'Мужчины'")
 
 
 
@@ -48,13 +49,15 @@ class Main_page(Base):
         self.driver.get(self.url)
         self.driver.maximize_window()
         self.get_current_url()
-        self.assert_word(self.get_word_login_and_registration(), "Вход или регистрация")
+        self.asset_url("https://famshop.ru/")
+        self.assert_word(self.get_word_contact(), "Контакты")
 
 
-    def go_to_catalog(self):
-        self.click_catalog()
+    def go_to_category_men(self):
+        self.click_category_men()
         self.get_current_url()
-        self.assert_word(self.get_word_catalog(), f'Каталог товаров «Эльдорадо»')
+        self.asset_url("https://famshop.ru/product-category/men/")
+        self.assert_word(self.get_word_men(), "Мужчинам")
 
 
 
