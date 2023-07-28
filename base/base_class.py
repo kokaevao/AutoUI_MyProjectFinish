@@ -1,3 +1,6 @@
+import datetime
+
+
 class Base():
 
     def __init__(self, driver):
@@ -26,6 +29,13 @@ class Base():
         get_url = self.driver.current_url
         assert get_url == result
         print(f"URL адреса верный {get_url}")
+
+    """Method Screenshot"""
+
+    def get_screenshot(self):
+        now_date = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")
+        name_screenshot = 'screenshot' + now_date + '.png'
+        self.driver.save_screenshot('C:\\Users\\akokaev\\Desktop\\Learn_Python\\AutoUI_MyProjectFinish\\screen\\' + name_screenshot)
 
 
 

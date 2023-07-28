@@ -2,6 +2,9 @@ from base.base_class import Base
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import allure
+
+from utilities.logger import Logger
 
 
 class Main_page(Base):
@@ -46,18 +49,24 @@ class Main_page(Base):
     #Method
 
     def open_main_page(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        self.get_current_url()
-        self.asset_url("https://famshop.ru/")
-        self.assert_word(self.get_word_contact(), "Контакты")
+        with allure.step("Открытие главной страницы"):
+            Logger.add_start_step(method='open_main_page')
+            self.driver.get(self.url)
+            self.driver.maximize_window()
+            self.get_current_url()
+            self.asset_url("https://famshop.ru/")
+            self.assert_word(self.get_word_contact(), "Контакты")
+            Logger.add_end_step(url=self.driver.current_url, method='open_main_page')
 
 
     def go_to_category_men(self):
-        self.click_category_men()
-        self.get_current_url()
-        self.asset_url("https://famshop.ru/product-category/men/")
-        self.assert_word(self.get_word_men(), "Мужчинам")
+        with allure.step("Переход в меню Мужчинам"):
+            Logger.add_start_step(method='go_to_category_men')
+            self.click_category_men()
+            self.get_current_url()
+            self.asset_url("https://famshop.ru/product-category/men/")
+            self.assert_word(self.get_word_men(), "Мужчинам")
+            Logger.add_end_step(url=self.driver.current_url, method='go_to_category_men')
 
 
 
